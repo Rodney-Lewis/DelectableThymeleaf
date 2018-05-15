@@ -1,18 +1,58 @@
 package app;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.sun.media.jfxmedia.logging.Logger;
+import java.util.Properties;
+import java.lang.ClassLoader;
+import javax.sql.rowset.CachedRowSet;
+import com.sun.rowset.CachedRowSetImpl;
 
 public class Database {
+	
+	static String dbConnectionString = "";
+	static String dbUsername = "";
+	static String dbPassword = "";
+	
+	private static void GetDatabaseProperties() {
+		InputStream input = null;
+		
+		try {
+			ClassLoader classLoad = Thread.currentThread().getContextClassLoader();
+			input = classLoad.getResourceAsStream("config.properties");
+			Properties prop = new Properties();
+			prop.load(input);
+			dbConnectionString = prop.getProperty("dbdriver") 
+					   + "://" + prop.getProperty("dbhost") 
+					   + ":" + prop.getProperty("dbport")
+					   + "/" + prop.getProperty("dbname");
+			dbUsername = prop.getProperty("dbusername");
+			dbPassword = prop.getProperty("dbpassword");
+		} 
+		catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (input != null) {
+				try {
+					input.close();
+				}
+				catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+	}
 
 	private static Connection GetConnection() throws SQLException {
 		//TODO connection info should be at configuration level
-		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306", "root", "root");
+		if(dbConnectionString == "")
+			GetDatabaseProperties();
+		Connection conn = DriverManager.getConnection(dbConnectionString, dbUsername, dbPassword);
 		return conn;
 	}
 	
@@ -46,16 +86,19 @@ public class Database {
 		}
 	}
 	
-	public static ResultSet Query(String sqlQuery) {
+	public static CachedRowSet Query(String sqlQuery) {
 		Connection queryConnection = null;
 		Statement queryStatement = null;
 		ResultSet queryResults = null;
+		CachedRowSet cache = null;
 		
 		try {
 			queryConnection = GetConnection();
 			queryStatement = queryConnection.createStatement();
 			queryResults = queryStatement.executeQuery(sqlQuery);
-			return queryResults;
+			cache = new CachedRowSetImpl();
+			cache.populate(queryResults);
+			return cache;
 		}
 		catch (SQLException ex) {
 			//TODO Add rollback on exception and more useful logging with stacktrace
@@ -66,7 +109,7 @@ public class Database {
 			CloseStatement(queryStatement);
 			CloseResultSet(queryResults);
 		}
-		return queryResults;
+		return cache;
 	}
 	
 	public static String Update(String sqlQuery) {
