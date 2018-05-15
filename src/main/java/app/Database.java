@@ -49,7 +49,6 @@ public class Database {
 	}
 
 	private static Connection GetConnection() throws SQLException {
-		//TODO connection info should be at configuration level
 		if(dbConnectionString == "")
 			GetDatabaseProperties();
 		Connection conn = DriverManager.getConnection(dbConnectionString, dbUsername, dbPassword);
