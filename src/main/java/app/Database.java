@@ -22,8 +22,7 @@ public class Database {
 		InputStream input = null;
 		
 		try {
-			ClassLoader classLoad = Thread.currentThread().getContextClassLoader();
-			input = classLoad.getResourceAsStream("config.properties");
+			input = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
 			Properties prop = new Properties();
 			prop.load(input);
 			dbConnectionString = prop.getProperty("dbdriver") 
@@ -37,14 +36,12 @@ public class Database {
 			ex.printStackTrace();
 		}
 		finally {
-			if (input != null) {
 				try {
 					input.close();
 				}
 				catch (IOException ex) {
 					ex.printStackTrace();
 				}
-			}
 		}
 	}
 
@@ -57,8 +54,7 @@ public class Database {
 	
 	private static void CloseConnection(Connection conn) {
 		try {
-			if(conn != null)
-				conn.close();
+			conn.close();
 		}
 		catch (SQLException ex) {
 			ex.printStackTrace();
@@ -67,8 +63,7 @@ public class Database {
 	
 	private static void CloseStatement(Statement stmt) {
 		try {
-			if(stmt != null)
-				stmt.close();
+			stmt.close();
 		}
 		catch (SQLException ex) {
 			ex.printStackTrace();
@@ -77,8 +72,7 @@ public class Database {
 	
 	private static void CloseResultSet(ResultSet rs) {
 		try {
-			if(rs != null)
-				rs.close();
+			rs.close();
 		}
 		catch (SQLException ex) {
 			ex.printStackTrace();
@@ -100,7 +94,6 @@ public class Database {
 			return cache;
 		}
 		catch (SQLException ex) {
-			//TODO Add rollback on exception and more useful logging with stacktrace
 			ex.printStackTrace();
 		}
 		finally {
@@ -111,31 +104,22 @@ public class Database {
 		return cache;
 	}
 	
-	public static String Update(String sqlQuery) {
-		int effectedRows = 0;
+	public static void Update(String sqlQuery) {
+		//int effectedRows = 0;
 		Connection updateConnection = null;
 		Statement updateStatement = null;
 		
 		try {
 			updateConnection = GetConnection();
 			updateStatement = updateConnection.createStatement();
-			effectedRows = updateStatement.executeUpdate(sqlQuery);
-			
-			if(effectedRows > 0) {
-				return StatusCode.DATABASE_UPDATE_OKAY.ToString();
-			}
-			else {
-				return StatusCode.DATABASE_NO_EFFECTED_ROWS.ToString();
-			}
+			//effectedRows = updateStatement.executeUpdate(sqlQuery);
 		}
 		catch (SQLException ex) {
-			//TODO Add rollback on exception and more useful logging with stacktrace
 			ex.printStackTrace();
 		}
 		finally {
 			CloseConnection(updateConnection);
 			CloseStatement(updateStatement);
 		}
-		return StatusCode.DATABASE_UPDATE_ERROR.ToString();
 	}
 }
