@@ -1,5 +1,6 @@
 package app;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -13,16 +14,21 @@ import javax.sql.rowset.CachedRowSet;
 import com.sun.rowset.CachedRowSetImpl;
 
 public class Database {
-	
+	static String dbConnectionString = "jdbc:mariadb://127.0.0.1:3306/test";
+	static String dbUsername = "root";
+	static String dbPassword = "root";
+
+	/*
 	static String dbConnectionString = "";
 	static String dbUsername = "";
 	static String dbPassword = "";
-	
+	*/
 	private static void GetDatabaseProperties() {
 		InputStream input = null;
 		
 		try {
-			input = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
+			//input = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
+			//input = new FileInputStream("/config/config.properties");
 			Properties prop = new Properties();
 			prop.load(input);
 			dbConnectionString = prop.getProperty("dbdriver") 
@@ -31,6 +37,7 @@ public class Database {
 					   + "/" + prop.getProperty("dbname");
 			dbUsername = prop.getProperty("dbusername");
 			dbPassword = prop.getProperty("dbpassword");
+			
 		} 
 		catch (IOException ex) {
 			ex.printStackTrace();
