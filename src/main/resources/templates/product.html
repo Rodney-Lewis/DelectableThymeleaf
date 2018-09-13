@@ -13,5 +13,15 @@
     <p th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
     <p th:text="'calories: ' + ${product.calories}" />
     <p th:text="'ingredients: ' + ${product.ingredients}" />
+    <p th:text="'ingredient: ' + ${product.ingredient}" />
+    <p th:text="'premade: ' + ${product.premade}" /></br>
+    
+    <tr th:each="nutrient:${nutrients}">
+    	<th th:text="'name: ' + ${nutrient.name}"/></br>
+    	<td th:text="'id: ' + ${nutrient.id}"/></br>
+    	<td th:text="'value: ' + ${nutrient.value}"/></br>
+    	<td th:text="'unitOfMeasure: ' + ${nutrient.unitOfMeasure}"/></br>
+    </tr>
+    
 </body>
 </html>
