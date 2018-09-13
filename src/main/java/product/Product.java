@@ -26,115 +26,77 @@ class Product {
 		this.premade = premade;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
 
-
-
-	public void setId(int id) {
+	void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
-
-	public void setName(String name) {
+	void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public String getManufacturer() {
 		return manufacturer;
 	}
 
-
-
-	public void setManufacturer(String manufacturer) {
+	void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-
-
 
 	public float getServingSize() {
 		return servingSize;
 	}
 
-
-
-	public void setServingSize(float servingSize) {
+	void setServingSize(float servingSize) {
 		this.servingSize = servingSize;
 	}
-
-
 
 	public String getUnitOfMeasure() {
 		return unitOfMeasure;
 	}
 
-
-
-	public void setUnitOfMeasure(String unitOfMeasure) {
+	void setUnitOfMeasure(String unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
 	}
-
-
 
 	public int getCalories() {
 		return calories;
 	}
 
-
-
-	public void setCalories(int calories) {
+	void setCalories(int calories) {
 		this.calories = calories;
 	}
-
-
 
 	public String getIngredients() {
 		return ingredients;
 	}
 
-
-
-	public void setIngredients(String ingredients) {
+	void setIngredients(String ingredients) {
 		this.ingredients = ingredients;
 	}
-
-
 
 	public boolean isIngredient() {
 		return ingredient;
 	}
 
-
-
-	public void setIngredient(boolean ingredient) {
+	void setIngredient(boolean ingredient) {
 		this.ingredient = ingredient;
 	}
-
-
 
 	public boolean isPremade() {
 		return premade;
 	}
 
-
-
-	public void setPremade(boolean premade) {
+	void setPremade(boolean premade) {
 		this.premade = premade;
 	}
-
-
 
 	String ConvertFloatToFrac(float value) {
 		
