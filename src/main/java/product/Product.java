@@ -1,5 +1,9 @@
 package product;
 
+import java.util.ArrayList;
+
+import vendor.Vendor;
+
 class Product {
 
 	int id;
@@ -11,6 +15,8 @@ class Product {
 	String ingredients;
 	boolean ingredient;
 	boolean premade;
+	ArrayList<Nutrient> nutrients;
+	ArrayList<Vendor> vendors;
 	
 	public Product(int id, String name, String manufacturer, float servingSize, String unitOfMeasure, int calories,
 			String ingredients, boolean ingredient, boolean premade) {
