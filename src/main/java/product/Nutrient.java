@@ -7,6 +7,10 @@ class Nutrient {
 	float value;
 	String unitOfMeasure;
 	
+	public Nutrient() {
+		super();
+	}
+	
 	public Nutrient(int id, String name, float value, String unitOfMeasure) {
 		super();
 		this.id = id;

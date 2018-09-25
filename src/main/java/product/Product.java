@@ -15,8 +15,12 @@ class Product {
 	String ingredients;
 	boolean ingredient;
 	boolean premade;
-	ArrayList<Nutrient> nutrients;
-	ArrayList<Vendor> vendors;
+	ArrayList<Nutrient> nutrients = new ArrayList<Nutrient>();
+	ArrayList<Vendor> vendors = new ArrayList<Vendor>();
+	
+	public Product() {
+		super();
+	}
 	
 	public Product(int id, String name, String manufacturer, float servingSize, String unitOfMeasure, int calories,
 			String ingredients, boolean ingredient, boolean premade) {
@@ -30,6 +34,23 @@ class Product {
 		this.ingredients = ingredients;
 		this.ingredient = ingredient;
 		this.premade = premade;
+	}
+	
+	public Product(int id, String name, String manufacturer, float servingSize, String unitOfMeasure, int calories,
+			String ingredients, boolean ingredient, boolean premade, ArrayList<Nutrient> nutrients,
+			ArrayList<Vendor> vendors) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.manufacturer = manufacturer;
+		this.servingSize = servingSize;
+		this.unitOfMeasure = unitOfMeasure;
+		this.calories = calories;
+		this.ingredients = ingredients;
+		this.ingredient = ingredient;
+		this.premade = premade;
+		this.nutrients = nutrients;
+		this.vendors = vendors;
 	}
 
 	public int getId() {
@@ -104,36 +125,19 @@ class Product {
 		this.premade = premade;
 	}
 
-	String ConvertFloatToFrac(float value) {
-		
-		int numberOfDecimalPlaces = 0;
-		int multiplicationFactor;
-		int numerator;
-		int GreatestCommonDenominator;
-		int denominator;
-		String fraction = "";
-		
-		numberOfDecimalPlaces = Float.toString(value).indexOf('.') -  Float.toString(value).length() - 1;
-		multiplicationFactor = (int) Math.pow(10, numberOfDecimalPlaces);
-		numerator = (int) (value * multiplicationFactor);
-		
-		GreatestCommonDenominator = FindGreatestCommonDenominator(numerator, multiplicationFactor);
-		
-		numerator = numerator / GreatestCommonDenominator;
-		denominator = multiplicationFactor / GreatestCommonDenominator;
-		
-		fraction = Integer.toString(numerator) + '/' + Integer.toString(denominator);
-		return fraction;
+	public ArrayList<Nutrient> getNutrients() {
+		return nutrients;
 	}
-	
-	int FindGreatestCommonDenominator(int a, int b) {
-		//Euclidean division
-		int temp;
-		while(b != 0) {
-			temp = b;
-			b = a % b;
-			a = temp;
-		}
-		return a;
+
+	void setNutrients(ArrayList<Nutrient> nutrients) {
+		this.nutrients = nutrients;
+	}
+
+	public ArrayList<Vendor> getVendors() {
+		return vendors;
+	}
+
+	void setVendors(ArrayList<Vendor> vendors) {
+		this.vendors = vendors;
 	}
 }
