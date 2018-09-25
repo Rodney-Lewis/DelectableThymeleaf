@@ -16,7 +16,7 @@
     <p th:text="'ingredient: ' + ${product.ingredient}" />
     <p th:text="'premade: ' + ${product.premade}" /></br>
     
-    <tr th:each="nutrient:${nutrients}">
+    <tr th:each="nutrient, stat:${product.nutrients}">
     	<th th:text="'name: ' + ${nutrient.name}"/></br>
     	<td th:text="'id: ' + ${nutrient.id}"/></br>
     	<td th:text="'value: ' + ${nutrient.value}"/></br>
