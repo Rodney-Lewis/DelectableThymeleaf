@@ -43,13 +43,35 @@ public class ProductController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return "product.html";
+    	return "product";
+    }
+    
+    @GetMapping("/product/list")
+    public String getProductList(Model model) {
+    	String sql = "";
+
+		try {
+	    	sql = "Select * from products";
+			CachedRowSet set = Database.Query(sql);
+			
+			ArrayList<Product> productList = new ArrayList<Product>();
+						
+	    	while(set.next()) {
+		    	productList.add(new Product(set.getInt("id"), set.getString("name"), set.getString("manufacturer"),
+						set.getFloat("servingSize"), set.getString("unitOfMeasure"), set.getInt("calories"), 
+						set.getString("ingredients"), set.getBoolean("ingredient"), set.getBoolean("premade")));
+	    	}
+			model.addAttribute("productList", productList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return "productList";
     }
     
     @GetMapping("/product")
     public String greetingForm(Model model) {
         model.addAttribute("product", new Product());
-        return "form";
+        return "productAddForm";
     }
 
     @PostMapping(value="/product", params= {"save"})
@@ -57,18 +79,18 @@ public class ProductController {
         return "result";
     }
     
-    @RequestMapping(value="/product", params={"addRow"})
+    @PostMapping(value="/product", params={"addRow"})
     public String addRow(final Product product) {
         product.getNutrients().add(new Nutrient());
-        return "form";
+        return "productAddForm";
     }
     
-    @RequestMapping(value="/product", params={"removeRow"})
-    public String removeRow(final Product product, final HttpServletRequest req) {
+    @PostMapping(value="/product", params={"removeRow"})
+    public String removeRow(Product product, final HttpServletRequest req) {
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
         product.getNutrients().remove(rowId.intValue());
         product.getNutrients().trimToSize();
-        return "form";
+        return "productAddForm";
     }
 }
 
