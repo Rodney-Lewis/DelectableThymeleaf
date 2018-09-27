@@ -1,28 +1,8 @@
-package ingredient;
+package util;
 
-class Ingredient {
+public class FractionHelper {
 
-	int ID;
-	String name;
-	String type;
-	String description;
-	float servingSize;
-	int calories;
-	String servingSizeType;
-	
-	Ingredient(int ID, String name, String type, String description,
-			float servingSize, int calories, String servingSizeType)
-	{
-		this.ID = ID;
-		this.name = name;
-		this.type = type;
-		this.description = description;
-		this.servingSize = servingSize;
-		this.calories = calories;
-		this.servingSizeType = servingSizeType;
-	}
-	
-	String ConvertFloatToFrac(float value) {
+	static String ConvertFloatToFrac(float value) {
 		
 		int numberOfDecimalPlaces = 0;
 		int multiplicationFactor;
@@ -44,7 +24,7 @@ class Ingredient {
 		return fraction;
 	}
 	
-	int FindGreatestCommonDenominator(int a, int b) {
+	static int FindGreatestCommonDenominator(int a, int b) {
 		//Euclidean division
 		int temp;
 		while(b != 0) {

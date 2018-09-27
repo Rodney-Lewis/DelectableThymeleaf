@@ -1,6 +1,6 @@
-package ingredient;
+package product;
 
-public enum ServingSizeType {
+public enum UnitOfMeasure {
 
 	TEASPOON("Teaspoon", "tsp"),
 	TABLESPOON("Tablespoon", "tbsp"),
@@ -15,12 +15,15 @@ public enum ServingSizeType {
 	OUNCE("Ounce", "oz"),
 	MILLIGRAM("Milligram", "mg"),
 	GRAM("Gram", "g"),
-	KILOGRAM("Kilogram", "kg");
+	KILOGRAM("Kilogram", "kg"),
+	SLICE("Slice", "sli"),
+	PACKAGE("Package", "Pac");
+	
 	
 	private final String name;
 	private final String abbreviation;
 	
-	private ServingSizeType(String name, String abbreviation ) {
+	private UnitOfMeasure(String name, String abbreviation ) {
 		this.name = name;
 		this.abbreviation = abbreviation;
 	}

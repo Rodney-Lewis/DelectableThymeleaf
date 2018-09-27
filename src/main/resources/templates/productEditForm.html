@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="#" th:action="@{/product}" th:object="${product}" method="post">
+<fieldset>
+	<h1>Result</h1>
+    <p th:text="'id: ' + ${product.id}" />
+    <p th:text="'name: ' + ${product.name}" />
+    <p th:text="'manufacturer: ' + ${product.manufacturer}" />
+    <p th:text="'servingSize: ' + ${product.servingSize}" />
+    <p th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
+    <p th:text="'calories: ' + ${product.calories}" />
+    <p th:text="'ingredients: ' + ${product.ingredients}" />
+    <p th:text="'ingredient: ' + ${product.ingredient}" />
+    <p th:text="'premade: ' + ${product.premade}" /></br>
+    
+    
+    <tr th:each="nutrient, stat:*{nutrients}">  
+       <td><input type="text" th:field="*{nutrients[__${stat.index}__].name}" /></td>
+       <select th:field="*{nutrients[__${stat.index}__].unitOfMeasure}">
+       		<option th:each="unit : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}" th:selected="${i==75}"/>
+       </select>      
+       
+        
+       <td><input type="number" step="0.1" th:field="*{nutrients[__${stat.index}__].value}"/></td>      
+      <td><button type="submit" name="removeRow" th:value="${stat.index}">Remove row</button></td>
+    </tr>
+    
+    
+    <tr th:each="nutrient, stat:${product.nutrients}">
+    	<th th:text="'name: ' + ${nutrient.name}"/></br>
+    	<td th:text="'id: ' + ${nutrient.id}"/></br>
+    	<td th:text="'value: ' + ${nutrient.value}"/></br>
+    	<td th:text="'unitOfMeasure: ' + ${nutrient.unitOfMeasure}"/></br>
+    </tr>
+</fieldset>
+</form>
+    
+</body>
+</html>
