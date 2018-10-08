@@ -1,7 +1,7 @@
 package database;
 
 import junit.framework.*;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class QueryTest extends TestCase {
 
