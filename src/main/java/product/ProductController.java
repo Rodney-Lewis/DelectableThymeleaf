@@ -17,6 +17,7 @@ import app.Database;
 @Controller
 public class ProductController {
 
+	//Get individual product
     @GetMapping("/product/{id}")
     public String getProduct(Model model, @PathVariable int id) {
     	String sql = "";
@@ -27,7 +28,7 @@ public class ProductController {
 			set = Database.Query(sql);
 			set.last();
 			
-			Product prod = new Product(set.getInt("id"), set.getString("name"), set.getString("manufacturer"),
+			Product prod = new Product(set.getInt("id"), set.getString("name"), set.getString("brand"),
 					set.getFloat("servingSize"), set.getString("unitOfMeasure"), set.getInt("calories"), 
 					set.getString("ingredients"), set.getBoolean("ingredient"), set.getBoolean("premade"));
 					
@@ -51,6 +52,7 @@ public class ProductController {
     	return "product";
     }
     
+    //Get product list
     @GetMapping("/product/list")
     public String getProductList(Model model) {
     	String sql = "";
@@ -63,7 +65,7 @@ public class ProductController {
 			ArrayList<Product> productList = new ArrayList<Product>();
 						
 	    	while(set.next()) {
-		    	productList.add(new Product(set.getInt("id"), set.getString("name"), set.getString("manufacturer"),
+		    	productList.add(new Product(set.getInt("id"), set.getString("name"), set.getString("brand"),
 						set.getFloat("servingSize"), set.getString("unitOfMeasure"), set.getInt("calories"), 
 						set.getString("ingredients"), set.getBoolean("ingredient"), set.getBoolean("premade")));
 	    	}
@@ -80,6 +82,7 @@ public class ProductController {
     	return "productList";
     }
     
+    //Add product form
     @GetMapping("/product")
     public String greetingForm(Model model) {
         model.addAttribute("product", new Product());
@@ -104,5 +107,9 @@ public class ProductController {
         product.getNutrients().trimToSize();
         return "productAddForm";
     }
+    
+    //Edit product from
+    
+    //Delete product
 }
 

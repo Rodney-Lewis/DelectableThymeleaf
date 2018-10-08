@@ -8,7 +8,7 @@ class Product {
 
 	int id;
 	String name;
-	String manufacturer;
+	String brand;
 	float servingSize;
 	String unitOfMeasure;
 	int calories;
@@ -22,12 +22,12 @@ class Product {
 		super();
 	}
 	
-	public Product(int id, String name, String manufacturer, float servingSize, String unitOfMeasure, int calories,
+	public Product(int id, String name, String brand, float servingSize, String unitOfMeasure, int calories,
 			String ingredients, boolean ingredient, boolean premade) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.manufacturer = manufacturer;
+		this.brand = brand;
 		this.servingSize = servingSize;
 		this.unitOfMeasure = unitOfMeasure;
 		this.calories = calories;
@@ -36,13 +36,13 @@ class Product {
 		this.premade = premade;
 	}
 	
-	public Product(int id, String name, String manufacturer, float servingSize, String unitOfMeasure, int calories,
+	public Product(int id, String name, String brand, float servingSize, String unitOfMeasure, int calories,
 			String ingredients, boolean ingredient, boolean premade, ArrayList<Nutrient> nutrients,
 			ArrayList<Vendor> vendors) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.manufacturer = manufacturer;
+		this.brand = brand;
 		this.servingSize = servingSize;
 		this.unitOfMeasure = unitOfMeasure;
 		this.calories = calories;
@@ -69,12 +69,12 @@ class Product {
 		this.name = name;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
+	public String getBrand() {
+		return brand;
 	}
 
-	void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
+	void setBrand(String manufacturer) {
+		this.brand = manufacturer;
 	}
 
 	public float getServingSize() {
