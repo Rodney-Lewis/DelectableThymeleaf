@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title></title>
+	<title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-<form action="#" th:action="@{/product}" th:object="${product}" method="post">
-<fieldset>
-<table>
-  <thead>
-    <tr>
-      <th>
-        <button type="submit" name="addRow" th:value="AddRow">Add Row</button>
-        <button type="reset" name="reset" th:value="Reset">Reset</button>
-        <button type="submit" name="save" th:value="Save">Save</button>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="nutrient, stat:*{nutrients}">  
-       <td th:text="${stat.count}">1</td>
-       <td>
-        <input type="number" th:field="*{nutrients[__${stat.index}__].id}" />
-      </td>
-      <td>
-        <button type="submit" name="removeRow" th:value="${stat.index}">Remove row</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</fieldset>
-</form>
-</body>
+	<body>
+		<form action="#" th:action="@{/product}" th:object="${product}" method="post">
+			<fieldset>
+				<h1>Result</h1>
+			    <p th:text="'name: ' + ${product.name}" />
+			    <p th:text="'manufacturer: ' + ${product.manufacturer}" />
+			    <p th:text="'servingSize: ' + ${product.servingSize}" />
+			    <p th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
+			    <p th:text="'calories: ' + ${product.calories}" />
+			    <p th:text="'ingredients: ' + ${product.ingredients}" />
+			    <p th:text="'ingredient: ' + ${product.ingredient}" />
+			    <p th:text="'premade: ' + ${product.premade}" />
+				<button type="reset" name="reset" th:value="Reset">Reset</button>
+				<button type="submit" name="save" th:value="Save">Save</button>
+			</fieldset>
+		</form>
+	</body>
 </html>

@@ -4,20 +4,20 @@
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-	<h1>Result</h1>
-    
-    <tr th:each="product, stat:${productList}">
-    	<td th:text="'name: ' + ${product.name}" />
-    	<td th:text="'manufacturer: ' + ${product.manufacturer}" />
-    	<td th:text="'servingSize: ' + ${product.servingSize}" />
-    	<td th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
-    	<td th:text="'calories: ' + ${product.calories}" />
-    	<td th:text="'ingredients: ' + ${product.ingredients}" />
-    	<td th:text="'ingredient: ' + ${product.ingredient}" />
-    	<td th:text="'premade: ' + ${product.premade}" />
-    	<td><a th:href="@{'/product/' + ${product.id}}">Details</a></td>
-    </tr>
-    
-</body>
+	<body>
+		<h1>Result</h1>
+		<table>
+		    <tr th:each="product, stat:${productList}">
+		    	<td th:text="'name: ' + ${product.name}" />
+		    	<td th:text="'manufacturer: ' + ${product.manufacturer}" />
+		    	<td th:text="'servingSize: ' + ${product.servingSize}" />
+		    	<td th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
+		    	<td th:text="'calories: ' + ${product.calories}" />
+		    	<td th:text="'ingredients: ' + ${product.ingredients}" />
+		    	<td th:text="'ingredient: ' + ${product.ingredient}" />
+		    	<td th:text="'premade: ' + ${product.premade}" />
+		    	<td><a th:href="@{'/product/' + ${product.id}}">Details</a></td>
+		    </tr>
+		</table>
+	</body>
 </html>
