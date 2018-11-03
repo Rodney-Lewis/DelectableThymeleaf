@@ -1,23 +1,29 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Your Ingredients</title>
+   	<div th:replace="fragments/head :: head">...</div>
 </head>
 	<body>
-		<h1>Result</h1>
-		<table>
-		    <tr th:each="product, stat:${productList}">
-		    	<td th:text="'name: ' + ${product.name}" />
-		    	<td th:text="'manufacturer: ' + ${product.manufacturer}" />
-		    	<td th:text="'servingSize: ' + ${product.servingSize}" />
-		    	<td th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
-		    	<td th:text="'calories: ' + ${product.calories}" />
-		    	<td th:text="'ingredients: ' + ${product.ingredients}" />
-		    	<td th:text="'ingredient: ' + ${product.ingredient}" />
-		    	<td th:text="'premade: ' + ${product.premade}" />
-		    	<td><a th:href="@{'/product/' + ${product.id}}">Details</a></td>
-		    </tr>
-		</table>
+		<div th:replace="fragments/nav :: nav">...</div>
+		<div class="container">
+			<h2>Ingredients</h2>
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th>Name</th>
+					<th>Brand</th>
+					<th>Recipe ingredient</th>
+					<th>Prepared item</th>
+					<th>Details</th>
+				</tr>
+			    <tr th:each="product, stat:${productList}">
+			    	<td th:text="${product.name}" />
+			    	<td th:text="${product.brand}" />
+			    	<td th:text="${product.ingredient}" />
+			    	<td th:text="${product.premade}" />
+			    	<td><a th:href="@{'/product/' + ${product.id}}">Details</a></td>
+			    </tr>
+			</table>
+		</div>
 	</body>
 </html>

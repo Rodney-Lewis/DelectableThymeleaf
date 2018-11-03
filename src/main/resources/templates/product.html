@@ -1,18 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+	<title>Product Details</title>
+	<div th:replace="fragments/head :: head">...</div>
 </head>
 	<body>
-		<h1>Result</h1>
-	    <p th:text="'name: ' + ${product.name}" />
-	    <p th:text="'manufacturer: ' + ${product.manufacturer}" />
-	    <p th:text="'servingSize: ' + ${product.servingSize}" />
-	    <p th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
-	    <p th:text="'calories: ' + ${product.calories}" />
-	    <p th:text="'ingredients: ' + ${product.ingredients}" />
-	    <p th:text="'ingredient: ' + ${product.ingredient}" />
-	    <p th:text="'premade: ' + ${product.premade}" />
+		<div th:replace="fragments/nav :: nav">...</div>
+		<div class="container">
+			<h2>Details</h2>
+		    <p th:text="'Name: ' + ${product.name}" />
+		    <p th:text="'Brand ' + ${product.brand}" />
+		    <p th:text="'Serving Size: ' + ${product.servingSize}" />
+		    <p th:text="'Unit Of Measure: ' + ${product.unitOfMeasure}" />
+		    <p th:text="'Calories: ' + ${product.calories}" />
+		    <p th:text="'Ingredients: ' + ${product.ingredients}" />
+		    <p th:text="'Recipe ingredient: ' + ${product.ingredient}" />
+		    <p th:text="'Prepared item: ' + ${product.premade}" />
+		</div>
 	</body>
 </html>
