@@ -1,4 +1,4 @@
-package util;
+package delectable.app.utility;
 
 public class FractionHelper {
 
