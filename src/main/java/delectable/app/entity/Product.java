@@ -1,44 +1,49 @@
 package delectable.app.entity;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
-	@NotNull
-	@Size(min = 1, max = 25)
+	private int id;
 	private String name;
-
-	@NotNull
-	@Size(min = 1, max = 25)
 	private String brand;
-
-	@NotNull
-	@Min(0)
-	// private float servingSize;
+	private float servingSize;
 	private String unitOfMeasure;
+	private int calories;
+	private boolean ingredient;
+	private boolean premade;
+	private String ingredients;
+	private ArrayList<Product> knownIngredients;
+	private ArrayList<Nutrient> nutrients;
+	private ArrayList<Vendor> vendors;
 
-	@NotNull
-	@Min(0)
-	private Integer calories;
-
-	/*
-	 * private boolean ingredient; private boolean premade;
-	 * 
-	 * private String ingredients; private ArrayList<Product> knownIngredients;
-	 * private ArrayList<Nutrient> nutrients; private ArrayList<Vendor> vendors;
-	 */
 	public Product() {
+	}
+
+	public Product(int id, String name, String brand, float servingSize, String unitOfMeasure, int calories,
+			boolean ingredient, boolean premade, String ingredients, ArrayList<Product> knownIngredients,
+			ArrayList<Nutrient> nutrients, ArrayList<Vendor> vendors) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.brand = brand;
+		this.servingSize = servingSize;
+		this.unitOfMeasure = unitOfMeasure;
+		this.calories = calories;
+		this.ingredient = ingredient;
+		this.premade = premade;
+		this.ingredients = ingredients;
+		this.knownIngredients = knownIngredients;
+		this.nutrients = nutrients;
+		this.vendors = vendors;
 	}
 
 	public int getId() {
@@ -65,12 +70,13 @@ public class Product {
 		this.brand = brand;
 	}
 
-	/*
-	 * public float getServingSize() { return servingSize; }
-	 * 
-	 * public void setServingSize(float servingSize) { this.servingSize =
-	 * servingSize; }
-	 */
+	public float getServingSize() {
+		return servingSize;
+	}
+
+	public void setServingSize(float servingSize) {
+		this.servingSize = servingSize;
+	}
 
 	public String getUnitOfMeasure() {
 		return unitOfMeasure;
@@ -88,33 +94,52 @@ public class Product {
 		this.calories = calories;
 	}
 
-	/*
-	 * public boolean isIngredient() { return ingredient; }
-	 * 
-	 * public void setIngredient(boolean ingredient) { this.ingredient = ingredient;
-	 * }
-	 * 
-	 * public boolean isPremade() { return premade; }
-	 * 
-	 * public void setPremade(boolean premade) { this.premade = premade; }
-	 * 
-	 * public String getIngredients() { return ingredients; }
-	 * 
-	 * public void setIngredients(String ingredients) { this.ingredients =
-	 * ingredients; }
-	 * 
-	 * public ArrayList<Product> getKnownIngredients() { return knownIngredients; }
-	 * 
-	 * public void setKnownIngredients(ArrayList<Product> knownIngredients) {
-	 * this.knownIngredients = knownIngredients; }
-	 * 
-	 * public ArrayList<Nutrient> getNutrients() { return nutrients; }
-	 * 
-	 * public void setNutrients(ArrayList<Nutrient> nutrients) { this.nutrients =
-	 * nutrients; }
-	 * 
-	 * public ArrayList<Vendor> getVendors() { return vendors; }
-	 * 
-	 * public void setVendors(ArrayList<Vendor> vendors) { this.vendors = vendors; }
-	 */
+	public boolean isIngredient() {
+		return ingredient;
+	}
+
+	public void setIngredient(boolean ingredient) {
+		this.ingredient = ingredient;
+	}
+
+	public boolean isPremade() {
+		return premade;
+	}
+
+	public void setPremade(boolean premade) {
+		this.premade = premade;
+	}
+
+	public String getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public ArrayList<Product> getKnownIngredients() {
+		return knownIngredients;
+	}
+
+	public void setKnownIngredients(ArrayList<Product> knownIngredients) {
+		this.knownIngredients = knownIngredients;
+	}
+
+	public ArrayList<Nutrient> getNutrients() {
+		return nutrients;
+	}
+
+	public void setNutrients(ArrayList<Nutrient> nutrients) {
+		this.nutrients = nutrients;
+	}
+
+	public ArrayList<Vendor> getVendors() {
+		return vendors;
+	}
+
+	public void setVendors(ArrayList<Vendor> vendors) {
+		this.vendors = vendors;
+	}
+
 }

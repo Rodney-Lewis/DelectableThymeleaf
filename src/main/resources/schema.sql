@@ -16,7 +16,6 @@
 CREATE DATABASE IF NOT EXISTS `delectable` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `delectable`;
 
--- Data exporting was unselected.
 -- Dumping structure for table delectable.nutrient
 CREATE TABLE IF NOT EXISTS `nutrient` (
   `id` int(11) NOT NULL,
@@ -30,10 +29,14 @@ CREATE TABLE IF NOT EXISTS `nutrient` (
 -- Dumping structure for table delectable.product
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL,
-  `brand` varchar(25) NOT NULL,
+  `brand` varchar(255) DEFAULT NULL,
   `calories` int(11) NOT NULL,
-  `name` varchar(25) NOT NULL,
-  `unit_of_measure` varchar(255) NOT NULL,
+  `ingredient` bit(1) NOT NULL,
+  `ingredients` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `premade` bit(1) NOT NULL,
+  `serving_size` float NOT NULL,
+  `unit_of_measure` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,11 +45,24 @@ CREATE TABLE IF NOT EXISTS `product` (
 CREATE TABLE IF NOT EXISTS `recipe` (
   `id` int(11) NOT NULL,
   `cook_time` time DEFAULT NULL,
-  `description` varchar(254) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `directions` varchar(255) DEFAULT NULL,
-  `name` varchar(25) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `prep_time` time DEFAULT NULL,
   `source` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table delectable.restaurant
+CREATE TABLE IF NOT EXISTS `restaurant` (
+  `id` int(11) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `carry_out` bit(1) NOT NULL,
+  `delivers` bit(1) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

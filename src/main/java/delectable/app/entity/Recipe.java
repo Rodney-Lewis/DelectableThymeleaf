@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Recipe {
@@ -16,28 +14,20 @@ public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@NotNull
-	@Size(min = 1, max = 25)
 	private String name;
-
-	@Size(min = 0, max = 254)
 	private String description;
-
 	private Time prepTime;
 	private Time cookTime;
-
 	private String directions;
 	private String source;
-
 	private ArrayList<Product> ingredients;
 
 	public Recipe() {
 		super();
 	}
 
-	public Recipe(int id, @NotNull @Size(min = 1, max = 25) String name, @Size(min = 0, max = 254) String description,
-			Time prepTime, Time cookTime, String directions, String source, ArrayList<Product> ingredients) {
+	public Recipe(int id, String name, String description, Time prepTime, Time cookTime, String directions,
+			String source, ArrayList<Product> ingredients) {
 		super();
 		this.id = id;
 		this.name = name;
