@@ -13,7 +13,9 @@ public class ProductService {
 
 	public Product getProduct(int id) {
 
-		TypedQuery<Product> query = entityManager.createQuery("SELECT * FROM product WHERE id = 1", Product.class);
+		TypedQuery<Product> query = entityManager.createQuery("SELECT c FROM product c WHERE c.id = :id",
+				Product.class);
+		query.setParameter("id", id);
 		List<Product> result = query.getResultList();
 
 		Product product = result.get(0);
