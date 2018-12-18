@@ -21,9 +21,6 @@ public class Product {
 	private boolean ingredient;
 	private boolean premade;
 	private String ingredients;
-	private ArrayList<Product> knownIngredients;
-	private ArrayList<Nutrient> nutrients;
-	private ArrayList<Vendor> vendors;
 
 	public Product() {
 	}
@@ -41,9 +38,7 @@ public class Product {
 		this.ingredient = ingredient;
 		this.premade = premade;
 		this.ingredients = ingredients;
-		this.knownIngredients = knownIngredients;
-		this.nutrients = nutrients;
-		this.vendors = vendors;
+
 	}
 
 	public int getId() {
@@ -117,29 +112,4 @@ public class Product {
 	public void setIngredients(String ingredients) {
 		this.ingredients = ingredients;
 	}
-
-	public ArrayList<Product> getKnownIngredients() {
-		return knownIngredients;
-	}
-
-	public void setKnownIngredients(ArrayList<Product> knownIngredients) {
-		this.knownIngredients = knownIngredients;
-	}
-
-	public ArrayList<Nutrient> getNutrients() {
-		return nutrients;
-	}
-
-	public void setNutrients(ArrayList<Nutrient> nutrients) {
-		this.nutrients = nutrients;
-	}
-
-	public ArrayList<Vendor> getVendors() {
-		return vendors;
-	}
-
-	public void setVendors(ArrayList<Vendor> vendors) {
-		this.vendors = vendors;
-	}
-
 }
