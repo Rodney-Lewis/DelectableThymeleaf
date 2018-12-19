@@ -2,29 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head> 
     <th:block th:replace="fragments/head.html :: head(title ='Vendor list')"></th:block>
+    <link rel="stylesheet" th:href="@{/cardColumns.css}">
 </head>
 	<body>
 		<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
-			<div class = "container">
+			<div class = "container col-10">
 				<h3>Vendors</h3>
-				<table class="table table-sm table-bordered table-striped ">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Number</th>
-							<th>Address</th>
-							<th>Website</th>
-						</tr>
-					</thead>
-					<tbody>
-					    <tr th:each="vendor, stat:${vendorList}">
-					    	<td th:text="${vendor.name}" />
-					    	<td th:text="${vendor.phoneNumber}" />
-					    	<td th:text="${vendor.address}" />
-					    	<td th:text="${vendor.website}" />
-					    </tr>
-				    </tbody>
-				</table>
+				<div class="card-columns">
+					<th:block th:each="vendor, stat:${vendorList}">
+						<div class="card border-dark">
+						  <img class="card-img-top" src="https://www.w3schools.com/images/w3schools_green.jpg" style="width:48px;height:48px;" alt="Card image cap">
+						  <div class="card-body">
+						    <p class="card-text" th:text="${vendor.name}"></p>
+						    <p class="card-text" th:text="${vendor.address}"></p>
+						    <p><a th:href="|tel: + ${vendor.phoneNumber}|" class="card-text" th:text="${vendor.phoneNumber}"></a></p>
+						    <p><a th:href="${vendor.website}" class="card-text" th:text="${vendor.website}"></a></p>
+						  </div>
+						</div>
+					</th:block>
+				</div>
 			</div>
 		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
 	</body>
