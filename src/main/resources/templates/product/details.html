@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/head.html :: head(title ='Product list')"></th:block>
+</head>
+	<body>
+		<div th:replace="fragments/nav :: nav(active = 'PRODUCT')"></div>
+		<div class="container">
+			<h2>Details</h2>
+		    <p th:text="'Name: ' + ${product.name}" />
+		</div>
+	</body>
+</html>

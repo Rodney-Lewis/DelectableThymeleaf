@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="fragments/head.html :: head(title ='Product form')"></th:block>
+</head>
+	<body>
+		<div th:replace="fragments/nav :: nav(active = 'PRODUCT')"></div>
+		<form action="#" th:action="@{/product}" th:object="${product}" method="post">
+			<fieldset>
+				<h1>Result</h1>
+			    <p th:text="'name: ' + ${product.name}" />
+			    <p th:text="'manufacturer: ' + ${product.manufacturer}" />
+			    <p th:text="'servingSize: ' + ${product.servingSize}" />
+			    <p th:text="'unitOfMeasure: ' + ${product.unitOfMeasure}" />
+			    <p th:text="'calories: ' + ${product.calories}" />
+			    <p th:text="'ingredients: ' + ${product.ingredients}" />
+			    <p th:text="'ingredient: ' + ${product.ingredient}" />
+			    <p th:text="'premade: ' + ${product.premade}" />
+				<button type="submit" name="save" th:value="Save">Save</button>
+			</fieldset>
+		</form>
+	</body>
+</html>

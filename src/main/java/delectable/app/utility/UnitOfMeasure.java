@@ -1,4 +1,4 @@
-package product;
+package delectable.app.utility;
 
 public enum UnitOfMeasure {
 

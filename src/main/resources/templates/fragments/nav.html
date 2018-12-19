@@ -1,0 +1,50 @@
+<th:block th:fragment="nav (active)">
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span> 
+	      </button>
+	      <a class="navbar-brand" href="/">Delectable</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	      
+		      <th:block th:switch="${active}">
+	    		<th:block th:case="PRODUCT">
+	    			<li><a href="/">Home</a></li>
+			        <li class="active"><a href="/product/list">Products</a></li>
+			        <li><a href="/recipe/list">Recipes</a></li> 
+			        <li><a href="/restaurant/list">Restaurants</a></li> 
+	    		</th:block>
+	    		<th:block th:case="RECIPE">
+	    			<li><a href="/">Home</a></li>
+			        <li><a href="/product/list">Products</a></li>
+			        <li class="active"><a href="/recipe/list">Recipes</a></li> 
+			        <li><a href="/restaurant/list">Restaurants</a></li>
+	    		</th:block>
+	    		<th:block th:case="RESTAURANT">
+	    			<li><a href="/">Home</a></li>
+			        <li><a href="/product/list">Products</a></li>
+			        <li><a href="/recipe/list">Recipes</a></li> 
+			        <li class="active"><a href="/restaurant/list">Restaurants</a></li>
+	    		</th:block>
+	    		<th:block th:case="*">
+	    			<li class="active"><a href="/">Home</a></li>
+			        <li><a href="/product/list">Products</a></li>
+			        <li><a href="/recipe/list">Recipes</a></li> 
+			        <li><a href="/restaurant/list">Restaurants</a></li>
+	    		</th:block>
+			</th:block>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</th:block>>
+
