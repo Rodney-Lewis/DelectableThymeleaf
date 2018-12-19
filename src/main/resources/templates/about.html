@@ -5,6 +5,7 @@
 </head>
 
 <body>
-	<div th:replace="fragments/nav :: nav(active = '')"></div>
+	<th:block th:replace="fragments/nav :: nav(active = '')"/>
+	<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
 </body>
 </html>
