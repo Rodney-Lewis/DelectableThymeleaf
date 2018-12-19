@@ -17,25 +17,36 @@
 	    			<li><a href="/">Home</a></li>
 			        <li class="active"><a href="/product/list">Products</a></li>
 			        <li><a href="/recipe/list">Recipes</a></li> 
-			        <li><a href="/restaurant/list">Restaurants</a></li> 
+			        <li><a href="/restaurant/list">Restaurants</a></li>
+			        <li><a href="/vendor/list">Vendors</a></li>
 	    		</th:block>
 	    		<th:block th:case="RECIPE">
 	    			<li><a href="/">Home</a></li>
 			        <li><a href="/product/list">Products</a></li>
 			        <li class="active"><a href="/recipe/list">Recipes</a></li> 
 			        <li><a href="/restaurant/list">Restaurants</a></li>
+			        <li><a href="/vendor/list">Vendors</a></li>
 	    		</th:block>
 	    		<th:block th:case="RESTAURANT">
 	    			<li><a href="/">Home</a></li>
 			        <li><a href="/product/list">Products</a></li>
 			        <li><a href="/recipe/list">Recipes</a></li> 
 			        <li class="active"><a href="/restaurant/list">Restaurants</a></li>
+			        <li><a href="/vendor/list">Vendors</a></li>
+	    		</th:block>
+	    		<th:block th:case="VENDOR">
+	    			<li><a href="/">Home</a></li>
+			        <li><a href="/product/list">Products</a></li>
+			        <li><a href="/recipe/list">Recipes</a></li> 
+			        <li><a href="/restaurant/list">Restaurants</a></li>
+			        <li class="active"><a href="/vendor/list">Vendors</a></li>
 	    		</th:block>
 	    		<th:block th:case="*">
 	    			<li class="active"><a href="/">Home</a></li>
 			        <li><a href="/product/list">Products</a></li>
 			        <li><a href="/recipe/list">Recipes</a></li> 
 			        <li><a href="/restaurant/list">Restaurants</a></li>
+			        <li><a href="/vendor/list">Vendors</a></li>
 	    		</th:block>
 			</th:block>
 	      </ul>
