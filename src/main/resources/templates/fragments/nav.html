@@ -1,50 +1,56 @@
 <th:block th:fragment="nav (active)">
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span> 
-	      </button>
-	      <a class="navbar-brand" href="/">Delectable</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class="nav navbar-nav">
-	      
-		      <th:block th:switch="${active}">
-	    		<th:block th:case="PRODUCT">
-	    			<li><a href="/">Home</a></li>
-			        <li class="active"><a href="/product/list">Products</a></li>
-			        <li><a href="/recipe/list">Recipes</a></li> 
-			        <li><a href="/restaurant/list">Restaurants</a></li> 
-	    		</th:block>
-	    		<th:block th:case="RECIPE">
-	    			<li><a href="/">Home</a></li>
-			        <li><a href="/product/list">Products</a></li>
-			        <li class="active"><a href="/recipe/list">Recipes</a></li> 
-			        <li><a href="/restaurant/list">Restaurants</a></li>
-	    		</th:block>
-	    		<th:block th:case="RESTAURANT">
-	    			<li><a href="/">Home</a></li>
-			        <li><a href="/product/list">Products</a></li>
-			        <li><a href="/recipe/list">Recipes</a></li> 
-			        <li class="active"><a href="/restaurant/list">Restaurants</a></li>
-	    		</th:block>
-	    		<th:block th:case="*">
-	    			<li class="active"><a href="/">Home</a></li>
-			        <li><a href="/product/list">Products</a></li>
-			        <li><a href="/recipe/list">Recipes</a></li> 
-			        <li><a href="/restaurant/list">Restaurants</a></li>
-	    		</th:block>
-			</th:block>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
-</th:block>>
+	<div class="containter pb-4">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="/">Delectable</a>
+	  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		        	<span class="navbar-toggler-icon"></span>
+		    	</button>
+			<div class="collapse navbar-collapse" id="myNavbar">
+		    	<div class="navbar-nav">
+		    		<th:block th:switch="${active}">
+			    		<th:block th:case="PRODUCT">
+			    			<a class="nav-link" href="/">Home</a></li>
+					        <a class="nav-link nav-item active"  href="/product/list">Products</a>
+					        <a class="nav-link nav-item"  href="/recipe/list">Recipes</a>
+					        <a class="nav-link nav-item"  href="/restaurant/list">Restaurants</a>
+					        <a class="nav-link nav-item"  href="/vendor/list">Vendors</a>
+			    		</th:block>
+			    		<th:block th:case="RECIPE">
+			    			<a class="nav-link nav-item"  href="/">Home</a>
+					        <a class="nav-link nav-item"  href="/product/list">Products</a>
+					        <a class="nav-link nav-item active"  href="/recipe/list">Recipes</a>
+					        <a class="nav-link nav-item"  href="/restaurant/list">Restaurants</a>
+					        <a class="nav-link nav-item"  href="/vendor/list">Vendors</a>
+			    		</th:block>
+			    		<th:block th:case="RESTAURANT">
+			    			<a class="nav-link nav-item"  href="/">Home</a>
+					        <a class="nav-link nav-item"  href="/product/list">Products</a>
+					        <a class="nav-link nav-item"  href="/recipe/list">Recipes</a>
+					        <a class="nav-link nav-item active"  href="/restaurant/list">Restaurants</a>
+					        <a class="nav-link nav-item"  href="/vendor/list">Vendors</a>
+			    		</th:block>
+			    		<th:block th:case="VENDOR">
+			    			<a class="nav-link nav-item" href="/">Home</a>
+					        <a class="nav-link nav-item" href="/product/list">Products</a>
+					        <a class="nav-link nav-item" href="/recipe/list">Recipes</a> 
+					        <a class="nav-link nav-item" href="/restaurant/list">Restaurants</a>
+					        <a class="nav-link nav-item active" href="/vendor/list">Vendors</a>
+			    		</th:block>
+			    		<th:block th:case="*">
+			    			<a class="nav-link nav-item active" href="/">Home</a>
+					        <a class="nav-link nav-item" href="/product/list">Products</a>
+					        <a class="nav-link nav-item" href="/recipe/list">Recipes</a>
+					        <a class="nav-link nav-item" href="/restaurant/list">Restaurants</a>
+					        <a class="nav-link nav-item" href="/vendor/list">Vendors</a>
+			    		</th:block>
+					</th:block>
+				</div>
+				<div class="navbar-nav ml-md-auto d-md-flex">
+			        <a class="nav-link nav-item" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+			        <a class="nav-link nav-item" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+		        </div>
+	        </div>
+		</nav>
+	</div>
+</th:block>
 

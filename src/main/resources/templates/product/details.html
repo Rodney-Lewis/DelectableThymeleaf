@@ -9,5 +9,6 @@
 			<h2>Details</h2>
 		    <p th:text="'Name: ' + ${product.name}" />
 		</div>
+		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
 	</body>
 </html>

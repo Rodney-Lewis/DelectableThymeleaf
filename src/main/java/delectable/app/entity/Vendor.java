@@ -16,6 +16,10 @@ public class Vendor {
 	String address;
 	String website;
 
+	public Vendor() {
+
+	}
+
 	public Vendor(int id, String name, String phoneNumber, String address, String website) {
 		super();
 		this.id = id;
