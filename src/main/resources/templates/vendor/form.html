@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head> 
+	    <th:block th:replace="fragments/head.html :: head(title ='Vendor list')"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
+			<div class = "container-fluid" style="width:70%">
+				<form action="#" th:action="@{/vendor}" th:object="${vendor}" method="post">
+					<input type="hidden" th:field="${vendor.id}" />
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" placeholder="Vendor name" th:field="${vendor.name}">
+					</div>
+					<div class="form-group">
+						<label for="telephone">Telephone number</label>
+						<input type="tel" class="form-control" id="telephone" placeholder="Telephone #" th:field="${vendor.phoneNumber}">
+					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" placeholder="Address" th:field="${vendor.address}">
+					</div>
+					<div class="form-group">
+						<label>Website url</label>
+						<input type="url" class="form-control" id="website" placeholder="http://example.com" th:field="${vendor.website}">
+					</div>
+					<button class="btn btn-dark" type="submit" name="save" th:value="save">Save</button>
+				</form>
+			</div>
+		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
+	</body>
+</html>

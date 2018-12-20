@@ -10,4 +10,6 @@ public interface VendorService extends PagingAndSortingRepository<Vendor, Intege
 
 	Page<Vendor> findAllByOrderByNameAsc(Pageable pageable);
 
+	Vendor findAllById(int id);
+
 }
