@@ -6,7 +6,7 @@
 </head>
 <body>
 	<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
-		<div class = "container-fluid" style="width:90%">
+		<div class = "container-fluid" style="width:80%">
 			<div class="row">
 				<div class="col">
 					<h3>Vendors</h3>
@@ -26,8 +26,17 @@
 								  <p class="card-text"><a th:href="|tel: + ${vendor.phoneNumber}|" class="card-text" th:text="${vendor.phoneNumber}"></a></p>
 								  <p class="card-text"><a th:href="${vendor.website}" class="card-text" th:text="${vendor.website}"></a></p>
 								</div>
-								<div class="card-footer text-right bg-transparent border-dark">
-								  	<a th:href="@{/vendor/__${vendor.id}__/edit}">Edit</a>
+								<div class="card-footer bg-transparent border-dark">
+									<div class="container">
+										<div class="row">
+											<div class="col">
+												<a class="btn btn-danger btn-sm" th:href="@{/vendor/__${vendor.id}__/remove}">Remove</a>
+											</div>
+											<div class="col-auto">
+												<a class="btn btn-dark btn-sm" th:href="@{/vendor/__${vendor.id}__/edit}">Edit</a>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</th:block>

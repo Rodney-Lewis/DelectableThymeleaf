@@ -20,7 +20,7 @@ public class VendorController {
 	private VendorService service;
 
 	@GetMapping("/vendor/list")
-	public String getVendorList(@PageableDefault(value = 15, page = 0) Pageable pageable, Model model) {
+	public String getVendorList(@PageableDefault(value = 20, page = 0) Pageable pageable, Model model) {
 		model.addAttribute("vendorList", service.findAllByOrderByNameAsc(pageable));
 		return "vendor/list";
 	}
@@ -37,7 +37,7 @@ public class VendorController {
 		return "redirect:/vendor/list";
 	}
 
-	@PostMapping(value = "/vendor", params = { "delete" })
+	@GetMapping("/vendor/{id}/remove")
 	public String deleteVendor(@ModelAttribute Vendor vendor) {
 		service.deleteById(vendor.getId());
 		return "redirect:/vendor/list";
