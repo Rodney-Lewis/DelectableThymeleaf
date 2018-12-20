@@ -4,24 +4,37 @@
     <th:block th:replace="fragments/head.html :: head(title ='Vendor list')"></th:block>
     <link rel="stylesheet" th:href="@{/css/cardColumns.css}">
 </head>
-	<body>
-		<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
-			<div class = "container col-10">
-				<h3>Vendors</h3>
-				<div class="card-columns">
-					<th:block th:each="vendor, stat:${vendorList}">
-						<div class="card border-dark">
-						  <img class="card-img-top" src="https://www.w3schools.com/images/w3schools_green.jpg" style="width:48px;height:48px;" alt="Card image cap">
-						  <div class="card-body">
-						    <p class="card-text" th:text="${vendor.name}"></p>
-						    <p class="card-text" th:text="${vendor.address}"></p>
-						    <p><a th:href="|tel: + ${vendor.phoneNumber}|" class="card-text" th:text="${vendor.phoneNumber}"></a></p>
-						    <p><a th:href="${vendor.website}" class="card-text" th:text="${vendor.website}"></a></p>
-						  </div>
-						</div>
-					</th:block>
+<body>
+	<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
+		<div class = "container-fluid" style="width:90%">
+			<div class="row">
+				<div class="col">
+					<h3>Vendors</h3>
+				</div>
+				<div class="col-auto">
+					<a th:href="@{/vendor/}" type="button" class="btn btn-dark btn-sm">Add new vendor</a>
 				</div>
 			</div>
-		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
-	</body>
+			<div class="row">
+				<div class="col">
+					<div class="card-columns">
+						<th:block th:each="vendor, stat:${vendorList}">
+							<div class="card border-dark">
+								<div class="card-body">
+								  <h5 class="card-text" th:text="${vendor.name}"></h5>
+								  <p class="card-text" th:text="${vendor.address}"></p>
+								  <p class="card-text"><a th:href="|tel: + ${vendor.phoneNumber}|" class="card-text" th:text="${vendor.phoneNumber}"></a></p>
+								  <p class="card-text"><a th:href="${vendor.website}" class="card-text" th:text="${vendor.website}"></a></p>
+								</div>
+								<div class="card-footer text-right bg-transparent border-dark">
+								  	<a th:href="@{/vendor/__${vendor.id}__/edit}">Edit</a>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
+</body>
 </html>
