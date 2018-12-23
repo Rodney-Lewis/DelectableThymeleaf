@@ -1,9 +1,18 @@
 package delectable.app.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import delectable.app.entity.secondary.OpenHours;
+import delectable.app.utility.Day;
 
 @Entity
 public class Restaurant {
@@ -15,23 +24,33 @@ public class Restaurant {
 	private String phoneNumber;
 	private String address;
 	private String website;
-	private boolean delivers;
+	private boolean delivery;
 	private boolean carryOut;
+	private boolean orderOnline;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
+	private List<OpenHours> hours = new ArrayList<OpenHours>(6);
 
 	public Restaurant() {
 		super();
+
+		for (Day days : Day.values()) {
+			hours.add(new OpenHours(this, days.toString(), "08:00:00", "17:00:00"));
+		}
 	}
 
-	public Restaurant(int id, String name, String phoneNumber, String address, String website, boolean delivers,
-			boolean carryOut) {
+	public Restaurant(int id, String name, String phoneNumber, String address, String website, boolean delivery,
+			boolean carryOut, boolean orderOnline, List<OpenHours> hours) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.website = website;
-		this.delivers = delivers;
+		this.delivery = delivery;
 		this.carryOut = carryOut;
+		this.orderOnline = orderOnline;
+		this.hours = hours;
 	}
 
 	public int getId() {
@@ -70,16 +89,16 @@ public class Restaurant {
 		return website;
 	}
 
-	public void setWebsite(String website) {
-		this.website = website;
+	public void setWebsite(String websiteMenu) {
+		this.website = websiteMenu;
 	}
 
-	public boolean isDelivers() {
-		return delivers;
+	public boolean isDelivery() {
+		return delivery;
 	}
 
-	public void setDelivers(boolean delivers) {
-		this.delivers = delivers;
+	public void setDelivery(boolean delivery) {
+		this.delivery = delivery;
 	}
 
 	public boolean isCarryOut() {
@@ -89,4 +108,21 @@ public class Restaurant {
 	public void setCarryOut(boolean carryOut) {
 		this.carryOut = carryOut;
 	}
+
+	public boolean isOrderOnline() {
+		return orderOnline;
+	}
+
+	public void setOrderOnline(boolean orderOnline) {
+		this.orderOnline = orderOnline;
+	}
+
+	public List<OpenHours> getHours() {
+		return hours;
+	}
+
+	public void setHours(List<OpenHours> hours) {
+		this.hours = hours;
+	}
+
 }
