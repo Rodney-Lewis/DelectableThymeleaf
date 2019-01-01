@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import delectable.app.entity.secondary.OpenHours;
+import delectable.app.entity.secondary.RestaurantOpenHours;
 import delectable.app.utility.Day;
 
 @Entity
@@ -29,18 +29,18 @@ public class Restaurant {
 	private boolean orderOnline;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
-	private List<OpenHours> hours = new ArrayList<OpenHours>(6);
+	private List<RestaurantOpenHours> hours = new ArrayList<RestaurantOpenHours>(6);
 
 	public Restaurant() {
 		super();
 
 		for (Day days : Day.values()) {
-			hours.add(new OpenHours(this, days.toString(), "08:00:00", "17:00:00"));
+			hours.add(new RestaurantOpenHours(this, days.toString(), "08:00:00", "17:00:00"));
 		}
 	}
 
 	public Restaurant(int id, String name, String phoneNumber, String address, String website, boolean delivery,
-			boolean carryOut, boolean orderOnline, List<OpenHours> hours) {
+			boolean carryOut, boolean orderOnline, List<RestaurantOpenHours> hours) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -117,11 +117,11 @@ public class Restaurant {
 		this.orderOnline = orderOnline;
 	}
 
-	public List<OpenHours> getHours() {
+	public List<RestaurantOpenHours> getHours() {
 		return hours;
 	}
 
-	public void setHours(List<OpenHours> hours) {
+	public void setHours(List<RestaurantOpenHours> hours) {
 		this.hours = hours;
 	}
 

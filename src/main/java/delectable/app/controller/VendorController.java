@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import delectable.app.entity.Vendor;
 import delectable.app.service.VendorService;
+import delectable.app.utility.Day;
 
 @Controller
 public class VendorController {
@@ -28,6 +29,7 @@ public class VendorController {
 	@GetMapping("/vendor")
 	public String getAddVendorForm(Model model) {
 		model.addAttribute("vendor", new Vendor());
+		model.addAttribute("days", Day.values());
 		return "vendor/form";
 	}
 
@@ -52,6 +54,7 @@ public class VendorController {
 	public String editVendor(Model model, @PathVariable int id) {
 		Vendor vendor = service.findAllById(id);
 		model.addAttribute("vendor", vendor);
+		model.addAttribute("days", Day.values());
 		return "vendor/form";
 	}
 

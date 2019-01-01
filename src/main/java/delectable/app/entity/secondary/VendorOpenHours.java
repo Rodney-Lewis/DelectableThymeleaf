@@ -8,29 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import delectable.app.entity.Restaurant;
+import delectable.app.entity.Vendor;
 
 @Entity
-public class OpenHours {
+public class VendorOpenHours {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "restaurant_id")
-	Restaurant restaurant;
+	@JoinColumn(name = "vendor_id")
+	Vendor vendor;
 	String day;
 	String openTime;
 	String closeTime;
 
-	public OpenHours() {
+	public VendorOpenHours() {
 		super();
 	}
 
-	public OpenHours(Restaurant restaurant, String day, String openTime, String closeTime) {
+	public VendorOpenHours(Vendor vendor, String day, String openTime, String closeTime) {
 		super();
-		this.restaurant = restaurant;
+		this.vendor = vendor;
 		this.day = day;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
@@ -44,12 +44,12 @@ public class OpenHours {
 		this.id = id;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public Vendor getVendor() {
+		return vendor;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 	public String getDay() {
