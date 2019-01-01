@@ -7,6 +7,7 @@
 		<th:block th:replace="fragments/nav :: nav(active = 'restaurant')"/>
 			<div class = "container-fluid" style="width:70%">
 				<form action="#" th:action="@{/restaurant}" th:object="${restaurant}" method="post">
+					<h4>Restaurant details</h4>
 					<input type="hidden" th:field="${restaurant.id}" />
 					<div class="form-group">
 						<label for="name">Name</label>
@@ -37,7 +38,7 @@
 						<label class="form-check-label" for="orderOnline">Order Online</label>
 					</div>
 					
-					<h4>Operating hours:</h4>
+					<h6>Operating hours</h6>
 					
 					<div class="form-group row">
 						<th:block th:each="day, stat : ${days}">
