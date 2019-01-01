@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head> 
+	    <th:block th:replace="fragments/head.html :: head(title ='Restaurant form')"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="fragments/nav :: nav(active = 'restaurant')"/>
+			<div class = "container-fluid" style="width:70%">
+				<form action="#" th:action="@{/restaurant}" th:object="${restaurant}" method="post">
+					<h4>Restaurant details</h4>
+					<input type="hidden" th:field="${restaurant.id}" />
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" placeholder="Restaurant name" th:field="${restaurant.name}">
+					</div>
+					<div class="form-group">
+						<label for="telephone">Telephone number</label>
+						<input type="tel" class="form-control" id="telephone" placeholder="Telephone #" th:field="${restaurant.phoneNumber}">
+					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" placeholder="Address" th:field="${restaurant.address}">
+					</div>
+					<div class="form-group">
+						<label for="website">Menu URL</label>
+						<input type="url" class="form-control" id="website" placeholder="http://example.com" th:field="${restaurant.website}">
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="delivery" th:field="${restaurant.delivery}">
+						<label class="form-check-label" for="delivery">Delivery</label>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="carryout" th:field="${restaurant.carryOut}">
+						<label class="form-check-label" for="carryout">Carry out</label>
+					</div>
+					<div class="form-check pb-2">
+						<input type="checkbox" class="form-check-input" id="orderOnline" th:field="${restaurant.orderOnline}">
+						<label class="form-check-label" for="orderOnline">Order Online</label>
+					</div>
+					
+					<h6>Operating hours</h6>
+					
+					<div class="form-group row">
+						<th:block th:each="day, stat : ${days}">
+						<div class="col">
+							<label th:text="${day}"></label>
+							<input type="hidden" th:field="${restaurant.hours[__${stat.index}__].id}" />
+							<input type="time" step="60" class="form-control" th:field="${restaurant.hours[__${stat.index}__].openTime}">
+							<input type="time" step="60" class="form-control" th:field="${restaurant.hours[__${stat.index}__].closeTime}">
+						</div>
+						</th:block>
+					</div>
+					<button class="btn btn-dark" type="submit" name="save" th:value="save">Save</button>
+				</form>
+			</div>
+		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
+	</body>
+</html>

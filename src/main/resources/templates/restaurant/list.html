@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <th:block th:replace="fragments/head.html :: head(title ='Restaurant list')"></th:block>
+    <link rel="stylesheet" th:href="@{/css/cardColumns.css}">
+</head>
+<body>
+	<th:block th:replace="fragments/nav :: nav(active = 'RESTAURANT')"/>
+		<div class = "container-fluid" style="width:80%">
+			<div class="row">
+				<div class="col">
+					<h3>Restaurants</h3>
+				</div>
+				<div class="col-auto">
+					<a th:href="@{/restaurant/}" type="button" class="btn btn-dark btn-sm">Add new restaurant</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="card-columns">
+						<th:block th:each="restaurant, stat:${restaurantList}">
+							<div class="card border-dark">
+								<div class="card-body">
+								  <h5 class="card-text" th:text="${restaurant.name}"></h5>
+								  <p class="card-text" th:text="${restaurant.address}"></p>
+								  <p class="card-text"><a th:href="|tel: + ${restaurant.phoneNumber}|" class="card-text" th:text="${restaurant.phoneNumber}"></a></p>
+								  <p class="card-text"><a th:href="${restaurant.website}" class="card-text" th:text="${restaurant.website}"></a></p>
+								</div>
+								<div class="card-footer bg-transparent border-dark">
+									<div class="container">
+										<div class="row">
+											<div class="col">
+												<a class="btn btn-danger btn-sm" th:href="@{/restaurant/__${restaurant.id}__/remove}">Remove</a>
+											</div>
+											<div class="col-auto">
+												<a class="btn btn-dark btn-sm" th:href="@{/restaurant/__${restaurant.id}__/edit}">Edit</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>
+</body>
+</html>
