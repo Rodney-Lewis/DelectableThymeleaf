@@ -7,6 +7,7 @@
 		<th:block th:replace="fragments/nav :: nav(active = 'VENDOR')"/>
 			<div class = "container-fluid" style="width:70%">
 				<form action="#" th:action="@{/vendor}" th:object="${vendor}" method="post">
+					<h4>Vendor details</h4>
 					<input type="hidden" th:field="${vendor.id}" />
 					<div class="form-group">
 						<label for="name">Name</label>
@@ -24,6 +25,19 @@
 						<label>Website url</label>
 						<input type="url" class="form-control" id="website" placeholder="http://example.com" th:field="${vendor.website}">
 					</div>
+					<h6>Operating hours</h6>
+					
+					<div class="form-group row">
+						<th:block th:each="day, stat : ${days}">
+						<div class="col">
+							<label th:text="${day}"></label>
+							<input type="hidden" th:field="${vendor.hours[__${stat.index}__].id}" />
+							<input type="time" step="60" class="form-control" th:field="${vendor.hours[__${stat.index}__].openTime}">
+							<input type="time" step="60" class="form-control" th:field="${vendor.hours[__${stat.index}__].closeTime}">
+						</div>
+						</th:block>
+					</div>
+					
 					<button class="btn btn-dark" type="submit" name="save" th:value="save">Save</button>
 				</form>
 			</div>
