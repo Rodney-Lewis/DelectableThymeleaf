@@ -2,61 +2,62 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head> 
     <th:block th:replace="fragments/head.html :: head(title ='Product list')"></th:block>
-    <link rel="stylesheet" th:href="@{/css/hideTableColumn.css}">
+    <link rel="stylesheet" th:href="@{/css/cardColumns.css}">
 </head>
 	<body>
 		<th:block th:replace="fragments/nav :: nav(active = 'PRODUCT')"/>
-			<div class = "container">
-				<h3>Products</h3>
-				<table class="table table-sm table-bordered table-striped ">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Brand</th>
-							<th>Calories per Unit</th>
-							<th>Premade</th>
-							<th>Recipe Ingredient</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-					    <tr th:each="product, stat:${productList}">
-					    	<td th:text="${product.name}" />
-					    	<td th:text="${product.brand}" />
-					    	<td th:text="${product.calories} + ' ' + per + ' '+ ${product.servingSize} 
-					    	+ ' ' + ' ' + ${product.unitOfMeasure}" />
-					    	<td th:text="${product.premade}" />
-					    	<td th:text="${product.ingredient}" />
-					    	<td><a th:href="@{'/product/' + ${product.id}}">Details</a></td>
-					    </tr>
-				    </tbody>
-				</table>
-			</div>
-			<div class="container">
-				<ul class="pagination pagination-lg">
-					<li class="page-item" th:if="${productList.hasPrevious()}">
-						<a class="page-link" th:href="@{/product/list(page=${productList.number-1},size=${productList.size})}">Previous</a>
-					</li>
-					<li class="page-item disabled" th:unless="${productList.hasPrevious()}">
-						<a class="page-link">Previous</a>
-					</li>
-					
-					<th:block th:each="i: ${#numbers.sequence(0, productList.totalPages - 1)}">
-					    <li class="page-item active" th:if="${productList.number == i}">
-					    	<a class="page-link">[[${i}+1]]</a>
-					    </li>
-					    <li class="page-item" th:unless="${productList.number == i}">
-					    	<a class="page-link" th:href="@{/product/list(page=${i},size=${productList.size})}">[[${i}+1]]</a>
-					    </li>
-			    	</th:block>
-			    	
-			    	<li class="page-item" th:if="${productList.hasNext()}">
-			    		<a class="page-link" th:href="@{/product/list(page=${productList.number+1},size=${productList.size})}">Next</a>
-			    	</li>
-					<li class="page-item disabled" th:unless="${productList.hasNext()}">
-						<a class="page-link">Next</a>
-					</li>
-				</ul> 
+			<div class = "container-fluid" style="width:80%">
+				<div class="row">
+					<div class="col">
+						<h3>Products</h3>
+					</div>
+					<div class="col-auto">
+						<a th:href="@{/product/}" type="button" class="btn btn-dark btn-sm">Add new product</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="card-columns">
+							<th:block th:each="product, stat:${productList}">
+								<div class="card border-dark">
+									<div class="card-body">
+										<p class="card-text" th:text="${product.name}"></p>
+										<p class="card-text" th:text="${product.brand}"></p>
+										<p class="card-text" th:text="${product.category}"></p>
+									</div>
+								</div>
+							</th:block>
+						</div>
+					</div>
+				</div>
+				<div class="row align-items-end" th:if="${productList.totalPages > 1}">
+					<div class="col">
+						<ul class="pagination pagination-md justify-content-end">
+							<li class="page-item" th:if="${productList.hasPrevious()}">
+								<a class="page-link" th:href="@{/product/list(page=${productList.number-1},size=${productList.size})}">Previous</a>
+							</li>
+							<li class="page-item disabled" th:unless="${productList.hasPrevious()}">
+								<a class="page-link">Previous</a>
+							</li>
+							
+							<th:block th:each="i: ${#numbers.sequence(0, productList.totalPages - 1)}">
+							    <li class="page-item active" th:if="${productList.number == i}">
+							    	<a class="page-link">[[${i}+1]]</a>
+							    </li>
+							    <li class="page-item" th:unless="${productList.number == i}">
+							    	<a class="page-link" th:href="@{/product/list(page=${i},size=${productList.size})}">[[${i}+1]]</a>
+							    </li>
+					    	</th:block>
+					    	
+					    	<li class="page-item" th:if="${productList.hasNext()}">
+					    		<a class="page-link" th:href="@{/product/list(page=${productList.number+1},size=${productList.size})}">Next</a>
+					    	</li>
+							<li class="page-item disabled" th:unless="${productList.hasNext()}">
+								<a class="page-link">Next</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		<th:block th:replace="fragments/bootstrapScript :: bootstrapScripts"/>	
 	</body>
