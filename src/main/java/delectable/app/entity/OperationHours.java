@@ -1,36 +1,39 @@
-package delectable.app.entity.secondary;
+package delectable.app.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import delectable.app.entity.Vendor;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class VendorOpenHours {
+public class OperationHours {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vendor_id")
-	Vendor vendor;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hours")
+	List<Vendor> vendor = new ArrayList<Vendor>();
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hours")
+	List<Restaurant> restaurant = new ArrayList<Restaurant>();
+
 	String day;
 	String openTime;
 	String closeTime;
 
-	public VendorOpenHours() {
+	public OperationHours() {
 		super();
 	}
 
-	public VendorOpenHours(Vendor vendor, String day, String openTime, String closeTime) {
+	public OperationHours(String day, String openTime, String closeTime) {
 		super();
-		this.vendor = vendor;
 		this.day = day;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
@@ -42,14 +45,6 @@ public class VendorOpenHours {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Vendor getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
 	}
 
 	public String getDay() {

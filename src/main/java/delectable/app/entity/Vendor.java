@@ -9,34 +9,39 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-import delectable.app.entity.secondary.VendorOpenHours;
 import delectable.app.utility.Day;
 
 @Entity
 public class Vendor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	String name;
 	String phoneNumber;
 	String address;
 	String website;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vendor")
-	private List<VendorOpenHours> hours = new ArrayList<VendorOpenHours>(6);
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "operation_hours_vendor", joinColumns = {
+			@JoinColumn(name = "vendor_id") }, inverseJoinColumns = { @JoinColumn(name = "operation_hours_id") })
+	private List<OperationHours> hours = new ArrayList<OperationHours>(6);
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "vendors")
+	private List<Product> products = new ArrayList<Product>();
 
 	public Vendor() {
 		super();
 		for (Day days : Day.values()) {
-			hours.add(new VendorOpenHours(this, days.toString(), "08:00:00", "17:00:00"));
+			hours.add(new OperationHours(days.toString(), "08:00:00", "17:00:00"));
 		}
 	}
 
-	public Vendor(int id, String name, String phoneNumber, String address, String website,
-			List<VendorOpenHours> hours) {
+	public Vendor(int id, String name, String phoneNumber, String address, String website, List<OperationHours> hours) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -86,11 +91,11 @@ public class Vendor {
 		this.website = website;
 	}
 
-	public List<VendorOpenHours> getHours() {
+	public List<OperationHours> getHours() {
 		return hours;
 	}
 
-	public void setHours(List<VendorOpenHours> hours) {
+	public void setHours(List<OperationHours> hours) {
 		this.hours = hours;
 	}
 
