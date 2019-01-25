@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import delectable.app.entity.Restaurant;
-import delectable.app.service.OpenHoursService;
 import delectable.app.service.RestaurantService;
 import delectable.app.utility.Day;
 
@@ -20,9 +19,6 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantService restaurantService;
-
-	@Autowired
-	private OpenHoursService openHoursService;
 
 	@GetMapping("/restaurant/list")
 	public String getrestaurantList(@PageableDefault(value = 20, page = 0) Pageable pageable, Model model) {

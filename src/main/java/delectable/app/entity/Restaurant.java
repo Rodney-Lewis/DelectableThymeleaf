@@ -9,16 +9,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-import delectable.app.entity.secondary.RestaurantOpenHours;
 import delectable.app.utility.Day;
 
 @Entity
 public class Restaurant {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String phoneNumber;
@@ -28,19 +29,21 @@ public class Restaurant {
 	private boolean carryOut;
 	private boolean orderOnline;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "restaurant")
-	private List<RestaurantOpenHours> hours = new ArrayList<RestaurantOpenHours>(6);
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "operation_hours_restaurant", joinColumns = {
+			@JoinColumn(name = "restaurant_id") }, inverseJoinColumns = { @JoinColumn(name = "operation_hours_id") })
+	private List<OperationHours> hours = new ArrayList<OperationHours>(6);
 
 	public Restaurant() {
 		super();
 
 		for (Day days : Day.values()) {
-			hours.add(new RestaurantOpenHours(this, days.toString(), "08:00:00", "17:00:00"));
+			hours.add(new OperationHours(days.toString(), "08:00:00", "17:00:00"));
 		}
 	}
 
 	public Restaurant(int id, String name, String phoneNumber, String address, String website, boolean delivery,
-			boolean carryOut, boolean orderOnline, List<RestaurantOpenHours> hours) {
+			boolean carryOut, boolean orderOnline, List<OperationHours> hours) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -117,11 +120,11 @@ public class Restaurant {
 		this.orderOnline = orderOnline;
 	}
 
-	public List<RestaurantOpenHours> getHours() {
+	public List<OperationHours> getHours() {
 		return hours;
 	}
 
-	public void setHours(List<RestaurantOpenHours> hours) {
+	public void setHours(List<OperationHours> hours) {
 		this.hours = hours;
 	}
 

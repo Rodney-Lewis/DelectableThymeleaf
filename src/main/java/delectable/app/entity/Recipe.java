@@ -2,17 +2,23 @@ package delectable.app.entity;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Recipe {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
@@ -20,14 +26,18 @@ public class Recipe {
 	private Time cookTime;
 	private String directions;
 	private String source;
-	private ArrayList<Product> ingredients;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "recipe_prodct", joinColumns = { @JoinColumn(name = "recipe_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "product_id") })
+	private List<Product> products = new ArrayList<Product>();
 
 	public Recipe() {
 		super();
 	}
 
 	public Recipe(int id, String name, String description, Time prepTime, Time cookTime, String directions,
-			String source, ArrayList<Product> ingredients) {
+			String source, List<Product> products) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,7 +46,7 @@ public class Recipe {
 		this.cookTime = cookTime;
 		this.directions = directions;
 		this.source = source;
-		this.ingredients = ingredients;
+		this.products = products;
 	}
 
 	public int getId() {
@@ -95,11 +105,11 @@ public class Recipe {
 		this.source = source;
 	}
 
-	public ArrayList<Product> getIngredients() {
-		return ingredients;
+	public List<Product> getIngredients() {
+		return products;
 	}
 
-	public void setIngredients(ArrayList<Product> ingredients) {
-		this.ingredients = ingredients;
+	public void setIngredients(List<Product> recipe_ingredients) {
+		this.products = recipe_ingredients;
 	}
 }
